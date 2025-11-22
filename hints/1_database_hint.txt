@@ -1,0 +1,12 @@
+ПОДСКАЗКА К ЗАДАНИЮ 1 (База Данных)
+
+Вам нужно описать поля внутри класса. Используйте Column().
+
+Примерный код:
+
+class Quote(Base):
+    __tablename__ = "quotes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    text = Column(String)
+    author = Column(String)

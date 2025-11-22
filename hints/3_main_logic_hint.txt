@@ -1,0 +1,21 @@
+ПОДСКАЗКА К ЗАДАНИЯМ 3 и 4 (Main.py)
+
+--- ЗАДАНИЕ 3 (Чтение из БД) ---
+Используйте метод .query(Модель).all()
+
+Пример:
+    quotes_list = db.query(Quote).all()
+
+
+--- ЗАДАНИЕ 4 (Запись в БД) ---
+Вам нужно перебрать список, создать объект для каждой записи, добавить его в сессию и сделать коммит.
+
+Пример:
+    fresh_data = get_quotes_from_web()
+    
+    for item in fresh_data:
+        # Создаем объект класса Quote
+        new_quote = Quote(text=item["text"], author=item["author"])
+        db.add(new_quote)
+    
+    db.commit()

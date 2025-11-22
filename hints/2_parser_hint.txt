@@ -1,0 +1,30 @@
+ПОДСКАЗКА К ЗАДАНИЮ 2 (Парсинг)
+
+Основные шаги:
+1. request.get(URL)
+2. BeautifulSoup(response.text, "html.parser")
+3. find_all("div", class_="quote")
+
+Пример кода функции:
+
+    response = requests.get(URL)
+    if response.status_code != 200:
+        return []
+        
+    soup = BeautifulSoup(response.text, "html.parser")
+    cards = soup.find_all("div", class_="quote")
+    
+    result = []
+    for card in cards:
+        # Ищем текст внутри карточки
+        text_el = card.find("span", class_="text")
+        # Ищем автора
+        author_el = card.find("small", class_="author")
+        
+        if text_el and author_el:
+            result.append({
+                "text": text_el.text,
+                "author": author_el.text
+            })
+            
+    return result

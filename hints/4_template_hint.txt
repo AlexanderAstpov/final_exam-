@@ -1,0 +1,16 @@
+ПОДСКАЗКА К ЗАДАНИЮ 5 (Jinja Шаблон)
+
+1. В самом верху файла нужно наследование:
+{% extends "base.html" %}
+
+2. Весь HTML нужно обернуть в блок:
+{% block content %}
+   ... ваш HTML ...
+{% endblock %}
+
+3. Цикл пишется так:
+{% for q in quotes %}
+    ... HTML карточки ...
+    <p>{{ q.text }}</p>
+    <footer>{{ q.author }}</footer>
+{% endfor %}
