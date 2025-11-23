@@ -37,7 +37,7 @@ def home_page(request: Request, db: Session = Depends(get_db)):
     # [Если сложно - см. файл hints/3_main_logic_hint.txt]
     # =================================================================================
 
-    quotes_list = []  # Замените это на запрос к базе данных
+    quotes_list = db.query(Quote).all()  # Замените это на запрос к базе данных
 
     return templates.TemplateResponse(
         "index.html", {"request": request, "quotes": quotes_list}
@@ -61,6 +61,16 @@ def parse_data(db: Session = Depends(get_db)):
     # =================================================================================
 
     # Ваш код здесь
+    data = get_quotes_from_web()
+
+    for quote in data:
+        new_quote = Quote(
+            text=quote["text"],
+            author=quote["author"]
+        )
+        db.add(new_quote)
+
+    db.commit()
 
     return RedirectResponse(url="/", status_code=303)
 
